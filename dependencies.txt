@@ -1,0 +1,15 @@
+# NMS Base Builder dependencies
+trimesh[all]>=3.20.0     # Mesh loading (STL, OBJ, FBX via assimp)
+numpy>=1.24.0
+scipy>=1.10.0
+
+# FBX support requires the system assimp library.
+# On Debian/Ubuntu, run ONCE before pip install:
+#   sudo apt-get install libassimp-dev python3-pyassimp
+# Then:
+#   pip install pyassimp
+#
+# Alternatively, convert your FBX files to GLB/OBJ (free via Blender CLI)
+# and trimesh will load them natively without assimp.
+pyassimp>=4.1.0
+shapely
