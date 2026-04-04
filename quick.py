@@ -1,6 +1,6 @@
 from __future__ import annotations
 from functions import get_mesh_dimensions, fbx_to_trimesh, _build_frame, convert_mesh
-from nms_exporter import write_nms_json
+from exporter import write_nms_json
 
 
 import struct
@@ -483,9 +483,9 @@ def load_squares(verts_faces: tuple[list[list[float]], list[list[int]]]):
     return verts, faces
 
 
-def T_FLOOR_mesh_to_json(
+def convert(
     target_mesh: trimesh.Trimesh,
-    out_path: str,
+    output_path: str,
     grid_size: float | None = None,
     normal_dot_tol: float = 0.998,
     dist_tol: float | None = None
@@ -549,4 +549,4 @@ def T_FLOOR_mesh_to_json(
             "at": at_vec.tolist()    # ← in-plane forward vector  = NMS "At"
         })
         
-    write_nms_json(placed_parts, out_path)
+    write_nms_json(placed_parts, output_path)

@@ -1,6 +1,6 @@
 from __future__ import annotations
 from functions import get_mesh_dimensions, fbx_to_trimesh, _build_frame, convert_mesh
-from nms_exporter import write_nms_json
+from exporter import write_nms_json
 
 
 from pathlib import Path
@@ -170,10 +170,10 @@ def _fit_poly_in_poly(bounding_poly: Polygon,
 # Public API
 # ---------------------------------------------------------------------------
 
-def depth_fit_nms_to_json(
+def convert(
     target_mesh: trimesh.Trimesh,
     part_fbx_paths: list[str],
-    out_path: str,
+    output_path: str,
     depth: int = 1,
 ) -> None:
     """
@@ -325,4 +325,4 @@ def depth_fit_nms_to_json(
                   f"total placed so far: {len(placed_parts)}")
 
     print(f"[depth_fit] Finished. Total placed parts: {len(placed_parts)}")
-    write_nms_json(placed_parts, out_path)
+    write_nms_json(placed_parts, output_path)
