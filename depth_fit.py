@@ -174,7 +174,7 @@ def depth_fit_nms_to_json(
     target_mesh: trimesh.Trimesh,
     part_fbx_paths: list[str],
     out_path: str,
-    depth: int,
+    depth: int = 1,
 ) -> None:
     """
     For every face in the target mesh, greedily pack NMS parts (up to `depth`
