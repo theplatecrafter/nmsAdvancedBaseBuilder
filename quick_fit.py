@@ -528,17 +528,19 @@ def T_FLOOR_mesh_to_json(
     for center, normal, scale_factor in out:
         normal_hat = np.array(normal) / (np.linalg.norm(normal) + 1e-10)
 
-        # Compute an in-plane "at" (forward) vector — must be perpendicular to normal
+        # Compute an in-plane vector perpendicular to normal
         arbitrary = np.array([1.0, 0.0, 0.0])
         if abs(np.dot(normal_hat, arbitrary)) > 0.9:
             arbitrary = np.array([0.0, 1.0, 0.0])
 
-        at_vec = np.cross(normal_hat, arbitrary)
-        at_vec /= np.linalg.norm(at_vec) + 1e-10
+        in_plane_vec = np.cross(normal_hat, arbitrary)
+        in_plane_vec /= np.linalg.norm(in_plane_vec) + 1e-10
 
-        # Up = surface normal scaled by scale_factor
+        # At = surface normal pointing outward
+        at_vec = normal_hat
+        # Up = in-plane vector scaled by scale_factor (lies on face)
         # (json_to_stl extracts scale as np.linalg.norm(up))
-        up_vec = normal_hat * scale_factor
+        up_vec = in_plane_vec * scale_factor
 
         placed_parts.append({
             "part_info": t_floor_part_info,
